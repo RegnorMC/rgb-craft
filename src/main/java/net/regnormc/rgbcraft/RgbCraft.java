@@ -10,8 +10,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.regnormc.rgbcraft.models.ModelProvider;
-import net.regnormc.rgbcraft.item.RgbCraftItems;
+import net.regnormc.rgbcraft.models.RgbBlocks;
+import net.regnormc.rgbcraft.item.RgbItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +26,7 @@ public class RgbCraft {
 	public static final Block RGB_TERRACOTA = new Block(FabricBlockSettings.of(Material.WOOL).strength(0.8F).sounds(BlockSoundGroup.WOOL));
 
 	public static void init() {
-		RgbCraftItems.initialize();
+		RgbItems.initialize();
 		Registry.register(Registry.BLOCK, new Identifier(MOD_ID, "rgb_wool"), RGB_WOOL);
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "rgb_wool"), new BlockItem(RGB_WOOL, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
 
@@ -44,7 +44,7 @@ public class RgbCraft {
 	}
 
 	public static void initClient() {
-		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new ModelProvider());
+		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new RgbBlocks());
 	}
 
 	public static Identifier id(String path) {

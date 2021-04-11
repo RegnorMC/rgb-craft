@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.regnormc.rgbcraft.RgbCraft;
 
-public class RgbCraftItems {
+public class RgbItems {
 	public static RgbDyeItem RGB_DYE = register(RgbCraft.id("rgb_dye"), new RgbDyeItem(new FabricItemSettings().group(ItemGroup.MATERIALS)));
 
 	private static <T extends Item> T register(Identifier id, T item) {
