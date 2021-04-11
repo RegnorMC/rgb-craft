@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+
+  "id": "rgb-craft",
+  "version": "0.0.1",
+  "name": "RGBCraft",
+  "description": "Makes Minecraft more RGBish.",
+  "authors": [
+    "BeetMacol",
+    "Kubagliko_PL"
+  ],
+  "contact": {
+    "sources": "https://github.com/RegnorMC/rgb-craft"
+  },
+  "license": "BSD-3-Clause",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.regnormc.rgbcraft.RGBCraft::init"
+    ],
+    "client": [
+      "net.regnormc.rgbcraft.RGBCraft::initClient"
+    ]
+  },
+
+  "depends": {
+    "minecraft": "1.17.x",
+    "fabricloader": ">=0.11.0"
+  }
+}
