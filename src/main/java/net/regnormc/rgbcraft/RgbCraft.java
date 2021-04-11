@@ -1,5 +1,6 @@
 package net.regnormc.rgbcraft;
 
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -8,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.ConcretePowderBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.StainedGlassBlock;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
@@ -49,6 +51,8 @@ public class RgbCraft {
 
 	public static void initClient() {
 		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new RgbBlocks());
+
+		BlockRenderLayerMap.INSTANCE.putBlock(RGB_STAINED_GLASS, RenderLayer.getTranslucent());
 	}
 
 	public static Identifier id(String path) {

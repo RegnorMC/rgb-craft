@@ -65,7 +65,7 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 
 	@Override
 	public boolean hasDepth() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -141,6 +141,13 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 		QuadEmitter emitter = context.getEmitter();
 
 		int randomColor = rand.nextInt();
+
+		randomColor = randomColor % (0xFFFFFF);
+
+		Long randomColor_unsigned = (long)randomColor;
+		randomColor_unsigned += 4278190080L;
+
+		randomColor = randomColor_unsigned.intValue();
 
 		for(Direction direction : Direction.values()) {
 			emitter.square(direction, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
