@@ -1,51 +1,41 @@
 package net.regnormc.rgbcraft.models;
 
-import net.fabricmc.fabric.api.client.model.ModelProviderContext;
-import net.fabricmc.fabric.api.client.model.ModelResourceProvider;
-import net.minecraft.client.render.model.UnbakedModel;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.block.StainedGlassBlock;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.registry.Registry;
+import net.regnormc.rgbcraft.RgbCraft;
 
-public class RgbBlocks implements ModelResourceProvider {
-	public static final FullBlockRgbModel RGB_WOOL_MODEL = new FullBlockRgbModel("rgb_wool");
-	public static final Identifier RGB_WOOL_BLOCK = new Identifier("rgb-craft:block/rgb_wool");
-	public static final Identifier RGB_WOOL_ITEM = new Identifier("rgb-craft:item/rgb_wool");
+public class RgbBlocks {
+	public static final Block RGB_WOOL = register(RgbCraft.id("rgb_wool"), new Block(FabricBlockSettings.copyOf(Blocks.BLACK_WOOL)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block RGB_CONCRETE = register(RgbCraft.id("rgb_concrete"), new Block(FabricBlockSettings.copyOf(Blocks.BLACK_CONCRETE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block RGB_CONCRETE_POWDER = register(RgbCraft.id("rgb_concrete_powder"), new ConcretePowderBlock(RGB_CONCRETE, FabricBlockSettings.copyOf(Blocks.BLACK_CONCRETE_POWDER)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block RGB_STAINED_GLASS = register(RgbCraft.id("rgb_stained_glass"), new StainedGlassBlock(DyeColor.LIGHT_BLUE, FabricBlockSettings.copyOf(Blocks.BLACK_STAINED_GLASS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block RGB_TERRACOTTA = register(RgbCraft.id("rgb_terracotta"), new Block(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
 
-	public static final FullBlockRgbModel RGB_CONCRETE_MODEL = new FullBlockRgbModel("rgb_concrete");
-	public static final Identifier RGB_CONCRETE_BLOCK = new Identifier("rgb-craft:block/rgb_concrete");
-	public static final Identifier RGB_CONCRETE_ITEM = new Identifier("rgb-craft:item/rgb_concrete");
+	private static <T extends Block> T register(Identifier id, T block, ItemGroup itemGroup) {
+		return register(id, block, new BlockItem(block, new FabricItemSettings().group(itemGroup)));
+	}
 
-	public static final FullBlockRgbModel RGB_CONCRETE_POWDER_MODEL = new FullBlockRgbModel("rgb_concrete_powder");
-	public static final Identifier RGB_CONCRETE_POWDER_BLOCK = new Identifier("rgb-craft:block/rgb_concrete_powder");
-	public static final Identifier RGB_CONCRETE_POWDER_ITEM = new Identifier("rgb-craft:item/rgb_concrete_powder");
+	private static <T extends Block> T register(Identifier id, T block, BlockItem blockItem) {
+		Registry.register(Registry.ITEM, id, blockItem);
+		return register(id, block);
+	}
 
-	public static final FullBlockRgbModel RGB_STAINED_GLASS_MODEL = new FullBlockRgbModel("rgb_stained_glass");
-	public static final Identifier RGB_STAINED_GLASS_BLOCK = new Identifier("rgb-craft:block/rgb_stained_glass");
-	public static final Identifier RGB_STAINED_GLASS_ITEM = new Identifier("rgb-craft:item/rgb_stained_glass");
+	private static <T extends Block> T register(Identifier id, T block) {
+		return Registry.register(Registry.BLOCK, id, block);
+	}
 
-	public static final FullBlockRgbModel RGB_TERRACOTTA_MODEL = new FullBlockRgbModel("rgb_terracota");
-	public static final Identifier RGB_TERRACOTTA_BLOCK = new Identifier("rgb-craft:block/rgb_terracota");
-	public static final Identifier RGB_TERRACOTTA_ITEM = new Identifier("rgb-craft:item/rgb_terracota");
-
-	@Override
-	public @Nullable UnbakedModel loadModelResource(Identifier resourceId, ModelProviderContext context) {
-		if(resourceId.equals(RGB_WOOL_BLOCK) || resourceId.equals(RGB_WOOL_ITEM)) {
-			return RGB_WOOL_MODEL;
-		}
-		else if(resourceId.equals(RGB_CONCRETE_BLOCK) || resourceId.equals(RGB_CONCRETE_ITEM)) {
-			return RGB_CONCRETE_MODEL;
-		}
-		else if(resourceId.equals(RGB_CONCRETE_POWDER_BLOCK) || resourceId.equals(RGB_CONCRETE_POWDER_ITEM)) {
-			return RGB_CONCRETE_POWDER_MODEL;
-		}
-		else if(resourceId.equals(RGB_STAINED_GLASS_BLOCK) || resourceId.equals(RGB_STAINED_GLASS_ITEM)) {
-			return RGB_STAINED_GLASS_MODEL;
-		}
-		else if(resourceId.equals(RGB_TERRACOTTA_BLOCK) || resourceId.equals(RGB_TERRACOTTA_ITEM)) {
-			return RGB_TERRACOTTA_MODEL;
-		}
-		else {
-			return null;
-		}
+	/**
+	 * Used to initialize the class.
+	 */
+	public static void initialize() {
 	}
 }
