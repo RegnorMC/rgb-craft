@@ -24,6 +24,10 @@
     ]
   },
 
+  "mixins": [
+    "rgb-craft.mixins.json"
+  ],
+
   "depends": {
     "minecraft": "1.17.x",
     "fabricloader": ">=0.11.0",
