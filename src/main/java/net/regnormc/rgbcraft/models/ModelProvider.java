@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public class ModelProvider implements ModelResourceProvider {
-	public static final RGBWoolModel RGB_WOOL_MODEL = new RGBWoolModel();
+	public static final RgbWoolModel RGB_WOOL_MODEL = new RgbWoolModel();
 	public static final Identifier RGB_WOOL_MODEL_BLOCK = new Identifier("rgb-craft:block/rgb_wool");
 	public static final Identifier RGB_WOOL_MODEL_ITEM = new Identifier("rgb-craft:item/rgb_wool");
 	@Override

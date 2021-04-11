@@ -17,10 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.regnormc.rgbcraft.RGBCraft::init"
+      "net.regnormc.rgbcraft.RgbCraft::init"
     ],
     "client": [
-      "net.regnormc.rgbcraft.RGBCraft::initClient"
+      "net.regnormc.rgbcraft.RgbCraft::initClient"
     ]
   },
 

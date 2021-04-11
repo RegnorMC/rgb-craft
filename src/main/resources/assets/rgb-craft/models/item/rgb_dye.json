@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "rgb-craft:item/rgb_dye"
+    "layer0": "rgb-craft:item/rgb_dye",
+    "layer1": "rgb-craft:item/rgb_dye_overlay"
   }
 }

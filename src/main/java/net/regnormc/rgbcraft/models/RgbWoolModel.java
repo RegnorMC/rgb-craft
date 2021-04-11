@@ -37,7 +37,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class RGBWoolModel implements UnbakedModel, BakedModel, FabricBakedModel {
+public class RgbWoolModel implements UnbakedModel, BakedModel, FabricBakedModel {
 	private static final SpriteIdentifier[] SPRITE_IDS = new SpriteIdentifier[]{
 			new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, new Identifier("rgb-craft:block/rgb_wool"))
 	};
