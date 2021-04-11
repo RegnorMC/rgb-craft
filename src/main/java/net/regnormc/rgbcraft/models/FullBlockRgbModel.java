@@ -38,17 +38,18 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedModel {
-	private static final Sprite[] SPRITES = new Sprite[1];
-
+	private final Identifier textureIdentifier;
 	private final SpriteIdentifier[] SPRITE_IDS;
+	private Sprite[] SPRITES = new Sprite[1];
 	private Mesh mesh;
 
 	private static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
 	private ModelTransformation transformation;
 
 	public FullBlockRgbModel(String textureID) {
+		textureIdentifier = new Identifier("rgb-craft:block/" + textureID);
 		SPRITE_IDS = new SpriteIdentifier[]{
-				new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, new Identifier("rgb-craft:block/" + textureID))
+				new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, textureIdentifier)
 		};
 	}
 
@@ -64,7 +65,7 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 
 	@Override
 	public boolean hasDepth() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 
 	@Override
 	public Collection<Identifier> getModelDependencies() {
-		return Collections.singletonList(DEFAULT_BLOCK_MODEL);
+		return Arrays.asList(DEFAULT_BLOCK_MODEL);
 	}
 
 	@Override
