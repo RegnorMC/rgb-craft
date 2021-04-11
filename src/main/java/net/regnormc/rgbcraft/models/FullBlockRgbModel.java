@@ -37,15 +37,21 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class RgbWoolModel implements UnbakedModel, BakedModel, FabricBakedModel {
-	private static final SpriteIdentifier[] SPRITE_IDS = new SpriteIdentifier[]{
-			new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, new Identifier("rgb-craft:block/rgb_wool"))
-	};
+public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedModel {
+	private final Identifier textureIdentifier;
+	private final SpriteIdentifier[] SPRITE_IDS;
 	private Sprite[] SPRITES = new Sprite[1];
 	private Mesh mesh;
 
 	private static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
 	private ModelTransformation transformation;
+
+	public FullBlockRgbModel(String textureID) {
+		textureIdentifier = new Identifier("rgb-craft:block/" + textureID);
+		SPRITE_IDS = new SpriteIdentifier[]{
+				new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, textureIdentifier)
+		};
+	}
 
 	@Override
 	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, Random random) {
