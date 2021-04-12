@@ -9,6 +9,8 @@
   "mixins": [
   ],
   "client": [
-    "ItemColorsMixin"
+    "ItemColorsMixin",
+    "ShulkerBoxBlockEntityRendererMixin",
+    "MatrixStackAccessor"
   ]
 }

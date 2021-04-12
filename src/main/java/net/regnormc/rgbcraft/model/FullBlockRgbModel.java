@@ -36,102 +36,17 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedModel {
+public class FullBlockRgbModel extends BasicCustomRgbModel {
 	protected final Identifier textureIdentifier;
-	protected final SpriteIdentifier[] SPRITE_IDS;
-	protected Sprite[] SPRITES = new Sprite[1];
-	protected Mesh mesh;
-
-	protected static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
-	protected ModelTransformation transformation;
 
 	public FullBlockRgbModel(String textureID) {
 		textureIdentifier = new Identifier("rgb-craft:block/" + textureID);
-		SPRITE_IDS = new SpriteIdentifier[]{
-				new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, textureIdentifier)
-		};
-	}
-
-	@Override
-	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, Random random) {
-		return null;
-	}
-
-	@Override
-	public boolean useAmbientOcclusion() {
-		return true;
-	}
-
-	@Override
-	public boolean hasDepth() {
-		return false;
-	}
-
-	@Override
-	public boolean isSideLit() {
-		return true;
-	}
-
-	@Override
-	public boolean isBuiltin() {
-		return false;
+		SPRITE_IDS.add(new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, textureIdentifier));
 	}
 
 	@Override
 	public Sprite getSprite() {
-		return SPRITES[0];
-	}
-
-	@Override
-	public ModelTransformation getTransformation() {
-		return transformation;
-	}
-
-	@Override
-	public ModelOverrideList getOverrides() {
-		return ModelOverrideList.EMPTY;
-	}
-
-	@Override
-	public Collection<Identifier> getModelDependencies() {
-		return Arrays.asList(DEFAULT_BLOCK_MODEL);
-	}
-
-	@Override
-	public Collection<SpriteIdentifier> getTextureDependencies(Function<Identifier, UnbakedModel> unbakedModelGetter, Set<Pair<String, String>> unresolvedTextureReferences) {
-		return Arrays.asList(SPRITE_IDS);
-	}
-
-	@Nullable
-	@Override
-	public BakedModel bake(ModelLoader loader, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId) {
-		JsonUnbakedModel defaultBlockModel = (JsonUnbakedModel) loader.getOrLoadModel(DEFAULT_BLOCK_MODEL);
-
-		transformation = defaultBlockModel.getTransformations();
-
-		for(int i = 0; i < 1; ++i) {
-			SPRITES[i] = textureGetter.apply(SPRITE_IDS[i]);
-		}
-
-		Renderer renderer = RendererAccess.INSTANCE.getRenderer();
-		MeshBuilder builder = renderer.meshBuilder();
-		QuadEmitter emitter = builder.getEmitter();
-
-		/*for(Direction direction : Direction.values()) {
-			emitter.square(direction, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
-			emitter.spriteBake(0, SPRITES[0], MutableQuadView.BAKE_LOCK_UV);
-			emitter.spriteColor(0, 255, 255, 255, 255);
-
-			emitter.emit();
-		}*/
-		mesh = builder.build();
-
-		return this;
-	}
-
-	@Override
-	public boolean isVanillaAdapter() {
-		return false;
+		return SPRITES.get(0);
 	}
 
 	Random rand = new Random();
@@ -149,7 +64,7 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 
 		for(Direction direction : Direction.values()) {
 			emitter.square(direction, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
-			emitter.spriteBake(0, SPRITES[0], MutableQuadView.BAKE_LOCK_UV);
+			emitter.spriteBake(0, SPRITES.get(0), MutableQuadView.BAKE_LOCK_UV);
 			emitter.spriteColor(0, color, color, color, color);
 
 			emitter.emit();
