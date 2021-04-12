@@ -19,7 +19,7 @@ public class RgbModelProvider implements ModelResourceProvider {
 	public static final Identifier RGB_CONCRETE_POWDER_BLOCK = new Identifier("rgb-craft:block/rgb_concrete_powder");
 	public static final Identifier RGB_CONCRETE_POWDER_ITEM = new Identifier("rgb-craft:item/rgb_concrete_powder");
 
-	public static final FullBlockRgbModel RGB_STAINED_GLASS_MODEL = new FullBlockRgbModel("rgb_stained_glass");
+	public static final FullBlockRgbModel RGB_STAINED_GLASS_MODEL = new GlassRgbModel("rgb_stained_glass");
 	public static final Identifier RGB_STAINED_GLASS_BLOCK = new Identifier("rgb-craft:block/rgb_stained_glass");
 	public static final Identifier RGB_STAINED_GLASS_ITEM = new Identifier("rgb-craft:item/rgb_stained_glass");
 

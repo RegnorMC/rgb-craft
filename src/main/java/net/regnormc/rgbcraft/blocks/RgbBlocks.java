@@ -1,4 +1,4 @@
-package net.regnormc.rgbcraft.models;
+package net.regnormc.rgbcraft.blocks;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

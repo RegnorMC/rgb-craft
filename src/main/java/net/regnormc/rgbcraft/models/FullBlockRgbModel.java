@@ -38,13 +38,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedModel {
-	private final Identifier textureIdentifier;
-	private final SpriteIdentifier[] SPRITE_IDS;
-	private Sprite[] SPRITES = new Sprite[1];
-	private Mesh mesh;
+	protected final Identifier textureIdentifier;
+	protected final SpriteIdentifier[] SPRITE_IDS;
+	protected Sprite[] SPRITES = new Sprite[1];
+	protected Mesh mesh;
 
-	private static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
-	private ModelTransformation transformation;
+	protected static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
+	protected ModelTransformation transformation;
 
 	public FullBlockRgbModel(String textureID) {
 		textureIdentifier = new Identifier("rgb-craft:block/" + textureID);
@@ -137,22 +137,21 @@ public class FullBlockRgbModel implements UnbakedModel, BakedModel, FabricBakedM
 
 	Random rand = new Random();
 
-	public void generateModel(RenderContext context) {
-		QuadEmitter emitter = context.getEmitter();
-
+	void generateModel(RenderContext context) {
 		int randomColor = rand.nextInt();
 
 		randomColor = randomColor % (0xFFFFFF);
 
-		Long randomColor_unsigned = (long)randomColor;
-		randomColor_unsigned += 4278190080L;
+		generateModel(context, randomColor);
+	}
 
-		randomColor = randomColor_unsigned.intValue();
+	void generateModel(RenderContext context, int color) {
+		QuadEmitter emitter = context.getEmitter();
 
 		for(Direction direction : Direction.values()) {
 			emitter.square(direction, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
 			emitter.spriteBake(0, SPRITES[0], MutableQuadView.BAKE_LOCK_UV);
-			emitter.spriteColor(0, randomColor, randomColor, randomColor, randomColor);
+			emitter.spriteColor(0, color, color, color, color);
 
 			emitter.emit();
 		}

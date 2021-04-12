@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.regnormc.rgbcraft.item.RgbItems;
-import net.regnormc.rgbcraft.models.RgbBlocks;
+import net.regnormc.rgbcraft.blocks.RgbBlocks;
 import net.regnormc.rgbcraft.models.RgbModelProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
