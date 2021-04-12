@@ -1,4 +1,4 @@
-package net.regnormc.rgbcraft.models;
+package net.regnormc.rgbcraft.model;
 
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 

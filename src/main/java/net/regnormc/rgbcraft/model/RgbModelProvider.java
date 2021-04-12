@@ -1,4 +1,4 @@
-package net.regnormc.rgbcraft.models;
+package net.regnormc.rgbcraft.model;
 
 import net.fabricmc.fabric.api.client.model.ModelProviderContext;
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider;
