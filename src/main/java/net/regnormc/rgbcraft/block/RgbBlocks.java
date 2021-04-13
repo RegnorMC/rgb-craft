@@ -6,15 +6,18 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.StainedGlassBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.regnormc.rgbcraft.RgbCraft;
+import net.regnormc.rgbcraft.item.RgbItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,7 @@ public class RgbBlocks {
 	public static final Block RGB_CONCRETE_POWDER = register(RgbCraft.id("rgb_concrete_powder"), new ConcretePowderBlock(RGB_CONCRETE, FabricBlockSettings.copyOf(Blocks.BLACK_CONCRETE_POWDER)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block RGB_STAINED_GLASS = register(RgbCraft.id("rgb_stained_glass"), new StainedGlassBlock(DyeColor.LIGHT_BLUE, FabricBlockSettings.copyOf(Blocks.BLACK_STAINED_GLASS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block RGB_TERRACOTTA = register(RgbCraft.id("rgb_terracotta"), new Block(FabricBlockSettings.copyOf(Blocks.TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
+	//public static final Block RGB_SHULKER_BOX = register(RgbCraft.id("rgb_shulker_box"), new ShulkerBoxBlock(DyeColor.WHITE, FabricBlockSettings.copyOf(Blocks.SHULKER_BOX)), ItemGroup.BUILDING_BLOCKS);
 
 	private static <T extends Block> T register(Identifier id, T block, ItemGroup itemGroup) {
 		return register(id, block, new BlockItem(block, new FabricItemSettings().group(itemGroup)));
@@ -79,22 +83,24 @@ public class RgbBlocks {
 		addDyeableBlock(Blocks.WHITE_WOOL, true, RGB_WOOL);
 		addDyeableBlock(Blocks.TERRACOTTA, true, RGB_TERRACOTTA);
 		addDyeableBlock(Blocks.GLASS, true, RGB_STAINED_GLASS);
+		//addDyeableBlock(Blocks.SHULKER_BOX, true, RGB_SHULKER_BOX);
 		UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
 			Block hittedBlock = world.getBlockState(hitResult.getBlockPos()).getBlock();
-			if(isBlockDyeable(hittedBlock)) {
-				DyeableBlock dyeableBlock = getDyeableBlock(hittedBlock);
-				if(dyeableBlock.vanillaBlock) {
-					world.setBlockState(hitResult.getBlockPos(), dyeableBlock.resultBlock.getDefaultState());
-				}
-				else {
-					world.setBlockState(hitResult.getBlockPos(), Blocks.STONE.getDefaultState());
-				}
+			ItemStack stack = player.getMainHandStack();
+			if((isBlockDyeable(hittedBlock)) && (stack != null)) {
+				if(stack.getItem() == RgbItems.RGB_DYE) {
+					DyeableBlock dyeableBlock = getDyeableBlock(hittedBlock);
+					if (dyeableBlock.vanillaBlock) {
+						world.setBlockState(hitResult.getBlockPos(), dyeableBlock.resultBlock.getDefaultState());
+					} else {
+						world.setBlockState(hitResult.getBlockPos(), Blocks.STONE.getDefaultState());
+					}
 
-				return ActionResult.SUCCESS;
+					return ActionResult.SUCCESS;
+				}
 			}
-			else {
-				return ActionResult.PASS;
-			}
+
+			return ActionResult.PASS;
 		});
 	}
 }

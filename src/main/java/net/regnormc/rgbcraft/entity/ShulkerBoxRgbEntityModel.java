@@ -1,14 +1,19 @@
 package net.regnormc.rgbcraft.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.ShulkerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.world.World;
+import net.regnormc.rgbcraft.block.RgbBlocks;
 import net.regnormc.rgbcraft.mixin.MatrixStackAccessor;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Random;
 
 public class ShulkerBoxRgbEntityModel extends ShulkerEntityModel {
 	MatrixStack matrixStack = new MatrixStack();
@@ -31,6 +36,14 @@ public class ShulkerBoxRgbEntityModel extends ShulkerEntityModel {
 	}
 
 	public void renderColor(ShulkerBoxBlockEntity shulkerBoxBlockEntity) {
-		super.render(matrixStack, vertexConsumer, light, overlay, 1.0f, 0.0f, 0.0f, 1.0f);
+		Random rand = new Random();
+
+		World world = MinecraftClient.getInstance().player.getEntityWorld();
+		if(world != null) {
+			Block blockAtPos = world.getBlockState(shulkerBoxBlockEntity.getPos()).getBlock();
+			//if (blockAtPos == RgbBlocks.RGB_SHULKER_BOX) {
+				super.render(matrixStack, vertexConsumer, light, overlay, rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1.0f);
+			//}
+		}
 	}
 }
